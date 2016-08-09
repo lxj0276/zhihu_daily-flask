@@ -1,0 +1,5 @@
+*.py[cod]
+*.sqlite
+*.sqlite3
+tags
+app/static/image/*

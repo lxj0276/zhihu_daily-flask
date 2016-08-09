@@ -1,0 +1,67 @@
+{% extends "base.html" %} 
+
+{% block title %}
+<title>知乎日报 - 满足你的好奇心</title>
+{% endblock %} 
+
+{% block css %} 
+{% load staticfiles %}
+<link rel="stylesheet" href="{% static " daily/css/search.css " %}"> 
+{% endblock %} 
+
+{% block content %}
+<div style="margin-top: 40px;" class="row"></div>
+<!-- search button start -->
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+    <form target="_self" method="get" action="/daily/search">
+      <div class="input-group input-group-lg">
+        <input type="search" name="keyword" value="{{ keyword }}" class="form-control input-lg" placeholder="Search for...">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="submit">Go!</button>
+        </span>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- search button end -->
+
+<div style="margin-top: 40px;" class="row"></div>
+
+<!-- search result start -->
+{% if not hits %}
+<div class="row nors">
+  <div class="col-md-6 col-md-offset-3">很抱歉，没有找到与“{{ keyword }}”相关的网页。</div>
+</div>
+{% else %} {% for hit in hits.object_list %}
+<div class="row item">
+  <div class="col-md-3">
+    <img src="{{ hit.image.url }}">
+  </div>
+
+  <div class="col-md-9">
+    <div class="row">
+      <div class="col-md-10 title text-left"><a href="{{ hit.share_url }}">{{ hit.title }}</a></div>
+      <div class="col-md-2 date text-right">{{ hit.date }}</div>
+    </div>
+    <div class="summary">{{ hit.title }}</div>
+  </div>
+</div>
+{% endfor %} {% endif %}
+
+<div class="page">
+  <span class="step-links">
+    {% if hits.has_previous %}
+    <a href="?page={{ hits.previous_page_number }}&&keyword={{ keyword }}">上一页</a>
+    {% endif %}
+
+    {% if hits %}
+    {% for i in page_range %}
+    {% if hits.number == i %}
+    <span class="current">{{ hits.number }}</span> {% else %}
+    <a href="?page={{ i }}&&keyword={{ keyword }}">{{ i }}</a> {% endif %} {% endfor %} {% endif %} {% if hits.has_next %}
+    <a href="?page={{ hits.next_page_number }}&&keyword={{ keyword }}">下一页</a> {% endif %}
+  </span>
+</div>
+<!-- search result end -->
+{% endblock %}

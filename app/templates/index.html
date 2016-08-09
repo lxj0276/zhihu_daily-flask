@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>知乎日报 - 满足你的好奇心</title>
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='daily/css/daily.css') }}"> 
+{% endblock %}
+
+{% block content %}
+<div style="margin-top: 40px;" class="row"></div>
+
+<!-- search button start -->
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+    <form action="/daily/search" method="get" target="_self">
+      <div class="input-group input-group-lg">
+        <input type="search" name="keyword" class="form-control input-lg" placeholder="Search for...">
+        <span class="input-group-btn">
+          <button class="btn btn-lg btn-default" type="submit">Go!</button>
+        </span>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- search button end -->
+
+<!-- features start -->
+<div class="row features">
+  {% for news in news_list %}
+  <div class="col-md-4">
+    <div href="{{ news.share_url }}" class="feature">
+      <div class="mask"></div>
+      <img src="{{ url_for('static', filename='image/' + news.date + '/' + news.image_file) }}" alt="{{ news.image_name }}">
+      <a href="{{ news.share_url }}">
+        <h3>{{ news.title }}</h3>
+      </a>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+<!-- feature end -->
+
+<div style="margin-top: 40px;" class="row"></div>
+
+<!-- next start -->
+<div class="row next">
+  {% if after_date %}
+  <a target="_self" href="/daily/?date={{ after_date }}" class="page-btn">后一天</a> {% endif %} {% if before_date %}
+  <a target="_self" href="/daily/?date={{ before_date }}" class="page-btn">前一天</a> {% endif %}
+</div>
+<!-- next end -->
+
+{% endblock %}
