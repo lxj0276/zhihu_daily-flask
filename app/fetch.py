@@ -2,8 +2,6 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import unicode_literals
-
-import json
 import os
 
 from flask import current_app as app
@@ -30,17 +28,15 @@ class Fetch(Command):
                 continue
             news = zh.get_news(id)
             file_folder = os.path.join(image_folder, date_str)
-            image_file, _ = fetch.fetch_image(news['share_url'], news['image'], dir=file_folder)
-            print '==> title', news['title']
+            file_name = fetch.fetch_image(news['share_url'], news['image'], file_folder)
+            print '==> fetch title', news['title']
             data = News(
-                news_id=id,
-                date=date_str,
-                title=news['title'],
-                share_url=news['share_url'],
-                image_name=news['image_source'],
-                image_file=image_file,
+                news_id    = id,
+                date       = date_str,
+                title      = news['title'],
+                share_url  = news['share_url'],
+                image_name = news['image_source'],
+                image_file = file_name,
             )
             db.session.add(data)
         db.session.commit()
-
-

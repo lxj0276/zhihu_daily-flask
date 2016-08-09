@@ -5,8 +5,7 @@
 {% endblock %} 
 
 {% block css %} 
-{% load staticfiles %}
-<link rel="stylesheet" href="{% static " daily/css/search.css " %}"> 
+<link rel="stylesheet" href="{{ url_for('static', filename='daily/css/search.css') }}">
 {% endblock %} 
 
 {% block content %}
@@ -29,39 +28,51 @@
 <div style="margin-top: 40px;" class="row"></div>
 
 <!-- search result start -->
-{% if not hits %}
-<div class="row nors">
-  <div class="col-md-6 col-md-offset-3">很抱歉，没有找到与“{{ keyword }}”相关的网页。</div>
-</div>
-{% else %} {% for hit in hits.object_list %}
-<div class="row item">
-  <div class="col-md-3">
-    <img src="{{ hit.image.url }}">
+{% if not result %}
+  <div class="row nors">
+    <div class="col-md-6 col-md-offset-3">很抱歉，没有找到与“{{ keyword }}”相关的网页。</div>
   </div>
+{% else %}
+  {% for news in result %}
+    <div class="row item">
+      <div class="col-md-3">
+        <img src="{{ url_for('static', filename='image/' + news.date + '/' + news.image_file) }}" alt="{{ news.image_name }}">
+      </div>
 
-  <div class="col-md-9">
-    <div class="row">
-      <div class="col-md-10 title text-left"><a href="{{ hit.share_url }}">{{ hit.title }}</a></div>
-      <div class="col-md-2 date text-right">{{ hit.date }}</div>
+      <div class="col-md-9">
+        <div class="row">
+          <div class="col-md-10 title text-left"><a href="{{ news.share_url }}">{{ news.title }}</a></div>
+          <div class="col-md-2 date text-right">{{ news.date }}</div>
+        </div>
+      </div>
     </div>
-    <div class="summary">{{ hit.title }}</div>
-  </div>
-</div>
-{% endfor %} {% endif %}
+  {% endfor %}
+{% endif %}
 
 <div class="page">
-  <span class="step-links">
-    {% if hits.has_previous %}
-    <a href="?page={{ hits.previous_page_number }}&&keyword={{ keyword }}">上一页</a>
-    {% endif %}
+  <ul class="pagination pagination-lg">
+      {% if pagination.has_prev %}
+        <li><a href="?page={{ pagination.previous_page_number }}&&keyword={{ keyword }}">上一页</a></li>
+      {% else %}
+        <li class="disable"><a href="#">上一页</a></li>
+      {% endif %}
 
-    {% if hits %}
-    {% for i in page_range %}
-    {% if hits.number == i %}
-    <span class="current">{{ hits.number }}</span> {% else %}
-    <a href="?page={{ i }}&&keyword={{ keyword }}">{{ i }}</a> {% endif %} {% endfor %} {% endif %} {% if hits.has_next %}
-    <a href="?page={{ hits.next_page_number }}&&keyword={{ keyword }}">下一页</a> {% endif %}
-  </span>
+      {% if pagination %}
+        {% for i in pagination.page_range %}
+          {% if pagination.page == i %}
+          <li class="active"><a href="#">{{ pagination.page }}</a></li>
+          {% else %}
+          <li><a href="?page={{ i }}&&keyword={{ keyword }}">{{ i }}</a></li>
+          {% endif %} 
+        {% endfor %} 
+      {% endif %}
+
+      {% if pagination.has_next %}
+      <li><a href="?page={{ pagination.next_page_number }}&&keyword={{ keyword }}">下一页</a></li>
+      {% else %}
+      <li class="disable"><a href="#">下一页</a></li>
+      {% endif %}
+  </ul>
 </div>
 <!-- search result end -->
 {% endblock %}
