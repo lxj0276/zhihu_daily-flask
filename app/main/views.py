@@ -6,9 +6,10 @@ import json
 from flask import render_template, request
 from flask import abort
 from flask import session, redirect, url_for, current_app
+
+from . import main
 from .. import db
 from ..models import News
-from . import main
 from ..crawl.fetch import today_str, yesterday_date_str, tomorrow_date_str
 
 
@@ -99,3 +100,5 @@ def search():
         keyword    = keyword,
         result     = result[(page - 1) * page_size: page * page_size],
     )
+
+
