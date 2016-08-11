@@ -14,7 +14,6 @@
     <script src="/static/daily/js/bootstrap.min.js"></script>
     <!-- <script src="/static/test/js/zepto.min.js"></script> -->
     <script src="/static/test/js/vue.min.js"></script>
-    <script src="/static/test/js/main.js"></script>
     <base target="_self">
   </head>
 
@@ -30,32 +29,33 @@
     <!-- header end -->
 
     <!-- content start -->
-    <div class="main-content">
+    <div class="main-content" id="app">
       <div class="container-fixed-width">
         <div style="margin-top: 40px;" class="row"></div>
 
         <!-- search button start -->
         <div class="row">
           <div class="col-md-10 col-md-offset-1">
-            <form action="/search" method="get" target="_self">
               <div class="input-group input-group-lg">
-                <input type="search" name="keyword" class="form-control input-lg" placeholder="Search for...">
+                <input v-model="keyword" v-on:keyup.enter="searchNews" 
+                  type="search" name="keyword" class="form-control input-lg" 
+                  placeholder="Search for...">
                 <span class="input-group-btn">
-                  <button class="btn btn-lg btn-default" type="submit">Go!</button>
+                  <button v-on:click="searchNews" class="btn btn-lg btn-default" 
+                    type="submit">Go!</button>
                 </span>
               </div>
-            </form>
           </div>
         </div>
         <!-- search button end -->
 
         <!-- features start -->
-        <div class="row features" id="app">
+        <div class="row features"> 
           <div class="col-md-4" v-for="item in news">
             <div href="{{ item.share_url }}" class="feature">
               <div class="mask"></div>
-              <img src="{{ item.image_file }}" alt="{{ item.image_name }}">
-              <a href="{{ item.share_url }}">
+              <img v-bind:src=item.image_file alt="{{ item.image_name }}">
+              <a href="{{item.share_url }}">
                 <h3>{{ item.title }}</h3>
               </a>
             </div>
@@ -82,4 +82,5 @@
     <!-- footer end -->
 
   </body>
+    <script src="/static/test/js/main.js"></script>
 </html>

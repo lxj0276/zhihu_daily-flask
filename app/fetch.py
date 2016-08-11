@@ -22,6 +22,7 @@ class Fetch(Command):
 
         latest_news_ids = fetch.extract_news_ids(latest_news)
         date_str = fetch.extract_date_str(latest_news)
+        print '==> date: ', date_str
 
         for id in latest_news_ids:
             if News.query.filter_by(news_id=id).first():
