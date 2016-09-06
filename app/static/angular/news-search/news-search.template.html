@@ -1,0 +1,35 @@
+<div class="container-fixed-width">
+  <div style="margin-top: 40px;" class="row"></div>
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <form target="_self" method="get" action="/daily/search">
+        <div class="input-group input-group-lg">
+          <input type="search" name="keyword" value="为什么" class="form-control input-lg" placeholder="Search for...">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Go!</button>
+          </span>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="row features">
+    <div class="col-md-3" ng-repeat="item in $ctrl.news.stories">
+      <img src="{{ item.image_file }}" alt="{{ item.image_name }}">
+    </div>
+    <div class="col-md-9">
+      <div class="row">
+        <div class="col-md-10 title text-left"><a href="{{ item.share_url }}">{{ item.title }}</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top: 40px;" class="row"></div>
+  <div class="page">
+    <ul class="pagination pagination-lg">
+      <li class="disable"><a href="#">上一页</a></li>
+      <li class="active"><a href="#">1</a></li>
+      <li class="disable"><a href="#">下一页</a></li>
+    </ul>
+  </div>
+</div>
