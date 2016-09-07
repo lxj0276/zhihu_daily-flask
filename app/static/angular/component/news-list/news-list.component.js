@@ -7,7 +7,6 @@ angular.
     controller: ['$routeParams', 'News',
       function NewsListController($routeParams, News) {
         var now = new Date()
-
         var date_params = $routeParams.date
         if (date_params && date_params.length === 8){
           var date_str = date_params.substring(0,4) + '/' + date_params.substring(4,6) + '/' + date_params.substring(6)
@@ -18,7 +17,14 @@ angular.
         } else {
           this.previous = (new Date()).addDays(-1).formateDate()
         }
-        this.news = News.get({date: $routeParams.date});
+
+        // this.news = chunk(News.get({date: date_params}).stories, row);
+        var self = this
+        var data = News.get({date: date_params}, function(){
+          var row = 3
+          self.news = chunk(data.stories, row)
+          // console.log('==> ', self.news)
+        })
 
         this.search = function() {
           console.log('==> search submit')

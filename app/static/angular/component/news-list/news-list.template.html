@@ -1,9 +1,10 @@
-<div class="row">
-  <div class="col-md-4" ng-repeat="item in $ctrl.news.stories">
+<div class="row top-buffer" ng-repeat="items in $ctrl.news">
+  <div class="col-md-4" ng-repeat="item in items">
     <a href="{{ item.share_url }}">
-      <img alt="{{ item.image_name }}" ng-src="{{ item.image_file }}">
       <div class="caption">
-        <h4>{{ item.title }}</h4>
+        <div class="mask"></div>
+        <img alt="{{ item.image_name }}" ng-src="{{ item.image_file }}">
+          <h4>{{ item.title }}</h4>
       </div>
     </a>
   </div>
