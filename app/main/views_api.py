@@ -40,4 +40,4 @@ class NewsAPI(Resource):
             })
         return resp
 
-api.add_resource(NewsAPI, '/news/')
+api.add_resource(NewsAPI, '/daily/api/')

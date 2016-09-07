@@ -6,6 +6,7 @@ import json
 from flask import render_template, request
 from flask import abort
 from flask import session, redirect, url_for, current_app
+from flask import make_response
 
 from . import main
 from .. import db
@@ -14,13 +15,18 @@ from ..crawl.fetch import today_str, yesterday_date_str, tomorrow_date_str
 
 
 @main.route('/', methods=['GET', 'POST'])
+def index_page(**kwargs):
+    return make_response(open(current_app.static_folder + '/angular/index.html').read())
+
+@main.route('/daily/', methods=['GET', 'POST'])
 def index():
-    news_list = News.query.all()
     date_str = request.args.get("date", today_str())
     before_date = yesterday_date_str(date_str)
     after_date = tomorrow_date_str(date_str) \
         if today_str() != date_str else None
 
+    #  news_list = News.query.all()
+    news_list = News.query.filter(News.date.contains(date_str))
     return render_template(
         'index.html',
         news_list   = news_list,
@@ -79,7 +85,7 @@ class Pagination(object):
                 last = num
 
 
-@main.route('/search/', methods=['GET', 'POST'])
+@main.route('/daily/search/', methods=['GET', 'POST'])
 def search():
     page_size = 2
     page = int(request.args.get('page', 1))
@@ -100,5 +106,3 @@ def search():
         keyword    = keyword,
         result     = result[(page - 1) * page_size: page * page_size],
     )
-
-

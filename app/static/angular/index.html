@@ -7,39 +7,25 @@
     <meta name="description" content="知乎日报以独有的方式为你提供最高质、最深度、最有收获的阅读体验。每天 3 次，每次 7 分钟，获取最值得看的新闻资讯和深度解读。" />
     <meta name="keywords" content="知乎日报,知乎日报网页版,zhihuribao,zhihudaily,知乎,支护日报,知道日报" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/daily.css">
-    <base target="_self">
+    <meta http-equiv="Cache-Control" content="no-store" />
+
+
+    <link rel="stylesheet" href="/static/angular/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="/static/angular/css/base.css"> -->
+    <link rel="stylesheet" href="/static/angular/css/index.css">
   </head>
-  <body class="home">
-    <div class="header navbar-fixed-top">
-      <div class="container-fixed-width clearfix">
-        <h1 class="logo">
-          <a href="/" title="知乎" class="link-logo" target="_self"></a>
-        </h1>
-      </div>
-    </div>
-    <div class="main-content">
-      <div class="container-fixed-width">
-        <div style="margin-top: 40px;" class="row"></div>
-        <div class="row">
-          <div class="col-md-10 col-md-offset-1">
-            <div class="input-group input-group-lg">
-              <input type="search" name="keyword" class="form-control input-lg" placeholder="Search for...">
-              <span class="input-group-btn">
-                <button class="btn btn-lg btn-default" type="submit">
-                  Go!
-                </button>
-              </span>
-            </div>
-          </div>
+  <body style="margin-top: 80px">
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#!/">
+            <img src="/static/angular/img/logo.png" alt="知乎日报">
+          </a>
         </div>
-
-        <div ng-view>
-        </div>
-
       </div>
+    </nav>
+
+    <div class="container" ng-view>
     </div>
 
     <div class="footer">
@@ -48,22 +34,24 @@
         项目开源于<a href="https://github.com/zhmars/zhihu_daily-flask.git">Github</a>
       </div>
     </div>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/angular.js"></script>
-    <script src="js/angular-resource.js"></script>
-    <script src="js/angular-route.js"></script>
+    <script src="/static/angular/js/jquery.min.js"></script>
+    <script src="/static/angular/js/bootstrap.min.js"></script>
+    <script src="/static/angular/js/angular.js"></script>
+    <script src="/static/angular/js/angular-resource.js"></script>
+    <script src="/static/angular/js/angular-route.js"></script>
     <!-- <script src="/static/angular/js/angular.min.js"></script> -->
-    <!-- <script src="js/angular-route.min.js"></script> -->
-    <!-- <script src="js/angular-resource.min.js"></script> -->
-    <script src="app.module.js"></script>
-    <script src="app.config.js"></script>
-    <script src="core/core.module.js"></script>
-    <script src="core/news/news.module.js"></script>
-    <script src="core/news/news.service.js"></script>
-    <script src="news-list/news-list.module.js"></script>
-    <script src="news-list/news-list.component.js"></script>
-    <script src="news-search/news-search.module.js"></script>
-    <script src="news-search/news-search.component.js"></script>
+    <!-- <script src="/static/angular/js/angular-route.min.js"></script> -->
+    <!-- <script src="/static/angular/js/angular-resource.min.js"></script> -->
+    <script src="/static/angular/app.module.js"></script>
+    <script src="/static/angular/app.config.js"></script>
+    <script src="/static/angular/component/core/util.js"></script>
+    <script src="/static/angular/component/core/core.module.js"></script>
+    <script src="/static/angular/component/core/news/news.module.js"></script>
+    <script src="/static/angular/component/core/news/news.service.js"></script>
+    <script src="/static/angular/component/news-list/news-list.module.js"></script>
+    <script src="/static/angular/component/news-list/news-list.component.js"></script>
+    <!-- TODO -->
+    <script src="/static/angular/component/news-search/news-search.module.js"></script>
+    <script src="/static/angular/component/news-search/news-search.component.js"></script>
   </body>
 </html>

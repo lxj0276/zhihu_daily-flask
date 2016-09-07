@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col-md-4" ng-repeat="item in $ctrl.news.stories">
+    <a href="{{ item.share_url }}">
+      <img alt="{{ item.image_name }}" ng-src="{{ item.image_file }}">
+      <div class="caption">
+        <h4>{{ item.title }}</h4>
+      </div>
+    </a>
+  </div>
+</div>
+
+
+
+<ul class="pager">
+  <li>
+    <a class="btn-default" href="#!/news?date={{ $ctrl.previous }}">前一天</a>
+  </li>
+  <li ng-show="$ctrl.next">
+    <a class="btn-default" href="#!/news?date={{ $ctrl.next }}">后一天</a>
+  </li>
+</ul>

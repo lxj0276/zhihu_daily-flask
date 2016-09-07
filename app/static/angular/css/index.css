@@ -1,0 +1,25 @@
+.navbar-default {
+  background-color: #009dd7;
+  border-color: #E7E7E7;
+}
+
+.navbar-header {
+  height: 60px;
+}
+
+.navbar>.container-fluid .navbar-brand {
+  padding-top: 10px;
+  margin-left: 360px;
+}
+
+.container img {
+  width: 300px;
+  height: 280px;
+}
+
+.caption {
+  position: absolute;
+  top: 85%;
+  left: 0;
+  width: 60%;
+}

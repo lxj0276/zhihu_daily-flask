@@ -7,6 +7,9 @@ angular.
     controller: ['News',
       function NewsSearchController(News) {
         this.news = News.query();
+        this.search = function() {
+          console.log('==> search submit')
+        }
       }
     ]
   });
